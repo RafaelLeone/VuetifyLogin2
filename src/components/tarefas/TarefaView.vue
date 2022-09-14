@@ -1,9 +1,12 @@
 <template>
   <div>
-    <v-list-item>
+    <v-list-item :class="tarefa.concluido ? 'blue' : 'red'">
       <template v-slot:default="{}">
         <v-list-item-action>
-          <v-checkbox :input-value="tarefa.concluido"></v-checkbox>
+          <v-checkbox
+            @click="salvarClique"
+            :input-value="tarefa.concluido"
+          ></v-checkbox>
         </v-list-item-action>
 
         <v-list-item-content>
@@ -21,5 +24,10 @@
 <script>
 export default {
   props: ["tarefa"],
+  methods: {
+    salvarClique() {
+      this.$emit("salvarClick");
+    },
+  },
 };
 </script>

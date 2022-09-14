@@ -3,9 +3,9 @@
     <v-list flat subheader three-line>
       <v-subheader>General</v-subheader>
 
-      <v-list-item-group v-model="settings" multiple active-class="">
+      <v-list-item-group multiple active-class="">
         <div v-for="(tarefa, index) in tarefas" :key="index">
-          <TarefaView :tarefa="tarefa" />
+          <TarefaView :tarefa="tarefa" @salvarClick="recebiSalvar(index)" />
         </div>
       </v-list-item-group>
     </v-list>
@@ -28,6 +28,12 @@ export default {
         { titulo: "Comprar ração", concluido: false },
       ],
     };
+  },
+  methods: {
+    recebiSalvar(index) {
+      console.log("entrei");
+      this.tarefas[index].concluido = !this.tarefas[index].concluido;
+    },
   },
 };
 </script>
