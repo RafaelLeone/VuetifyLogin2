@@ -1,13 +1,13 @@
 <template>
   <div>
     <v-list-item>
-      <template v-slot:default="{ active }">
+      <template v-slot:default="{}">
         <v-list-item-action>
-          <v-checkbox :input-value="active"></v-checkbox>
+          <v-checkbox :input-value="tarefa.concluido"></v-checkbox>
         </v-list-item-action>
 
         <v-list-item-content>
-          <v-list-item-title>Notifications</v-list-item-title>
+          <v-list-item-title>{{ tarefa.titulo }}</v-list-item-title>
           <v-list-item-subtitle
             >Notify me about updates to apps or games that I
             downloaded</v-list-item-subtitle
@@ -18,4 +18,8 @@
   </div>
 </template>
 
-<script></script>
+<script>
+export default {
+  props: ["tarefa"],
+};
+</script>

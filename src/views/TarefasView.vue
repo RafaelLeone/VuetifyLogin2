@@ -4,8 +4,9 @@
       <v-subheader>General</v-subheader>
 
       <v-list-item-group v-model="settings" multiple active-class="">
-        <TarefaView />
-        <TarefaView />
+        <div v-for="(tarefa, index) in tarefas" :key="index">
+          <TarefaView :tarefa="tarefa" />
+        </div>
       </v-list-item-group>
     </v-list>
   </div>
@@ -19,6 +20,14 @@ export default {
 
   components: {
     TarefaView,
+  },
+  data() {
+    return {
+      tarefas: [
+        { titulo: "Ir ao mercado", concluido: false },
+        { titulo: "Comprar ração", concluido: false },
+      ],
+    };
   },
 };
 </script>
