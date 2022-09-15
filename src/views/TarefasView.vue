@@ -106,7 +106,6 @@ export default {
       this.tarefas.push(novaTarefa);
     },
     recebiSalvar(index) {
-      console.log("entrei");
       this.tarefas[index].concluido = !this.tarefas[index].concluido;
     },
     listarTarefas() {
