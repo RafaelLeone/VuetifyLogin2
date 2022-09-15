@@ -6,7 +6,7 @@
           <span>Registration successful!</span>
           <v-icon dark> mdi-checkbox-marked-circle </v-icon>
         </v-snackbar>
-        <v-form ref="form" @submit.prevent="submit">
+        <v-form ref="form" @submit.prevent="createTask">
           <v-container fluid>
             <v-row>
               <v-col cols="12" sm="6">
@@ -64,17 +64,15 @@ export default {
     TarefaView,
   },
   data() {
-    const defaultForm = Object.freeze({
-      first: "",
-      last: "",
-    });
     return {
-      form: Object.assign({}, defaultForm),
+      form: {
+        first: "",
+        last: "",
+      },
       rules: {
         name: [(val) => (val || "").length > 0 || "This field is required"],
       },
       snackbar: false,
-      defaultForm,
       tarefas: [],
     };
   },
@@ -85,19 +83,13 @@ export default {
   },
 
   methods: {
-    resetForm() {
-      this.form = Object.assign({}, this.defaultForm);
-      this.$refs.form.reset();
-    },
+    // resetForm() {
+    //   this.form = Object.assign({}, this.defaultForm);
+    //   this.$refs.form.reset();
+    // },
     submit() {
       this.snackbar = true;
-      this.resetForm();
-      // const novaTarefa = {
-      //   titulo: this.form.first,
-      //   descricao: this.form.last,
-      //   concluido: "",
-      // };
-      // this.tarefas.push(novaTarefa);
+      // this.resetForm();
     },
     recebiSalvar(index) {
       if (this.tarefas[index].status == "pending") {
@@ -115,6 +107,16 @@ export default {
     getTasks() {
       TasksApi.getTasks().then((data) => {
         this.tarefas = data;
+      });
+    },
+    createTask() {
+      const novaTarefa = {
+        title: this.form.first,
+        project: this.form.last,
+        status: "pending",
+      };
+      TasksApi.createTask(novaTarefa).then(() => {
+        this.getTasks();
       });
     },
   },
