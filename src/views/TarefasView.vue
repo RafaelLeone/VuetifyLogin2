@@ -38,8 +38,11 @@
       </v-card>
       <v-col cols="12"> </v-col>
       <v-subheader>Tarefas:</v-subheader>
-
-      <v-list-item-group multiple active-class="">
+      <v-list-item-group
+        multiple
+        active-class=""
+        style="display: flex; flex-direction: column-reverse"
+      >
         <div v-for="(tarefa, index) in tarefas" :key="index">
           <TarefaView
             :tarefa="tarefa"
@@ -83,14 +86,6 @@ export default {
   },
 
   methods: {
-    // resetForm() {
-    //   this.form = Object.assign({}, this.defaultForm);
-    //   this.$refs.form.reset();
-    // },
-    submit() {
-      this.snackbar = true;
-      // this.resetForm();
-    },
     recebiSalvar(index) {
       if (this.tarefas[index].status == "pending") {
         this.tarefas[index].status = "complete";
@@ -117,6 +112,7 @@ export default {
       };
       TasksApi.createTask(novaTarefa).then(() => {
         this.getTasks();
+        this.snackbar = true;
       });
     },
   },

@@ -16,7 +16,7 @@ module.exports = {
   },
   add: (req, res) => {
     const { title, project, status } = req.body;
-    const id = data.tasks.length + 1;
+    const id = data.tasks.length + 1; //arrumar
     const newTask = {
       id,
       title,
