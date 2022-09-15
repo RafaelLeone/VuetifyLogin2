@@ -3,12 +3,14 @@
       {
         "id": 1,
         "titulo": "Tarefa 1",
-        "descricao": "Estudos"
+        "descricao": "Estudos",
+        "concluido": false
       },
       {
         "id": 2,
         "titulo": "Tarefa 2",
-        "descricao": "Estudos"
+        "descricao": "Estudos",
+        "concluido": false
       }
     ]
   }
