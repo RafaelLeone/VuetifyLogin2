@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import TasksApi from "../TasksApi.js";
+import TasksApi from "@/api/tasks.api.js";
 import TarefaView from "../components/tarefas/TarefaView.vue";
 
 export default {
@@ -108,14 +108,14 @@ export default {
     recebiSalvar(index) {
       this.tarefas[index].concluido = !this.tarefas[index].concluido;
     },
-    listarTarefas() {
-      TasksApi.getTasks((data) => {
+    getTasks() {
+      TasksApi.getTasks().then((data) => {
         this.tarefas = data;
       });
     },
   },
   created() {
-    this.listarTarefas();
+    this.getTasks();
   },
 };
 </script>
