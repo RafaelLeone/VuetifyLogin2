@@ -11,8 +11,8 @@
         </v-list-item-action>
 
         <v-list-item-content>
-          <v-list-item-title>{{ tarefa.titulo }}</v-list-item-title>
-          <v-list-item-subtitle>{{ tarefa.descricao }}</v-list-item-subtitle>
+          <v-list-item-title>{{ tarefa.title }}</v-list-item-title>
+          <v-list-item-subtitle>{{ tarefa.project }}</v-list-item-subtitle>
         </v-list-item-content>
       </template>
     </v-list-item>
