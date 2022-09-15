@@ -41,7 +41,11 @@
 
       <v-list-item-group multiple active-class="">
         <div v-for="(tarefa, index) in tarefas" :key="index">
-          <TarefaView :tarefa="tarefa" @salvarClick="recebiSalvar(index)" />
+          <TarefaView
+            :tarefa="tarefa"
+            @salvarClick="recebiSalvar(index)"
+            @mandarDel="deletarTarefa(index)"
+          />
         </div>
       </v-list-item-group>
     </v-list>
@@ -51,6 +55,7 @@
 <script>
 import TasksApi from "@/api/tasks.api.js";
 import TarefaView from "../components/tarefas/TarefaView.vue";
+import tasksApi from "@/api/tasks.api.js";
 
 export default {
   name: "HomeView",
@@ -70,18 +75,7 @@ export default {
       },
       snackbar: false,
       defaultForm,
-      tarefas: [
-        // {
-        //   titulo: "Ir ao mercado",
-        //   descricao: "Comprar pão, café e iogurte",
-        //   concluido: false,
-        // },
-        // {
-        //   titulo: "Comprar ração",
-        //   descricao: "A última foi a verde dos dois",
-        //   concluido: false,
-        // },
-      ],
+      tarefas: [],
     };
   },
   computed: {
@@ -98,15 +92,25 @@ export default {
     submit() {
       this.snackbar = true;
       this.resetForm();
-      const novaTarefa = {
-        titulo: this.form.first,
-        descricao: this.form.last,
-        concluido: false,
-      };
-      this.tarefas.push(novaTarefa);
+      // const novaTarefa = {
+      //   titulo: this.form.first,
+      //   descricao: this.form.last,
+      //   concluido: "",
+      // };
+      // this.tarefas.push(novaTarefa);
     },
     recebiSalvar(index) {
-      this.tarefas[index].concluido = !this.tarefas[index].concluido;
+      if (this.tarefas[index].status == "pending") {
+        this.tarefas[index].status = "complete";
+      }
+      if (this.tarefas[index].status == "complete") {
+        this.tarefas[index].status == "pending";
+      }
+    },
+    deletarTarefa(index) {
+      tasksApi.removeTask(index).then(() => {
+        this.getTasks();
+      });
     },
     getTasks() {
       TasksApi.getTasks().then((data) => {
