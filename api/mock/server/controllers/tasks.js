@@ -16,7 +16,10 @@ module.exports = {
   },
   add: (req, res) => {
     const { title, project, status } = req.body;
-    const id = data.tasks.length + 1; //arrumar
+    const id =
+      data.tasks[data.tasks.length - 1] === undefined
+        ? 1
+        : data.tasks[data.tasks.length - 1].id + 1; //arrumar
     const newTask = {
       id,
       title,

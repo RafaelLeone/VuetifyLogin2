@@ -6,6 +6,10 @@
           <span>Registration successful!</span>
           <v-icon dark> mdi-checkbox-marked-circle </v-icon>
         </v-snackbar>
+        <v-snackbar v-model="deletado" absolute bottom right color="red">
+          <span>Deletion successful!</span>
+          <v-icon dark> mdi-checkbox-marked-circle </v-icon>
+        </v-snackbar>
         <v-form ref="form" @submit.prevent="createTask">
           <v-container fluid>
             <v-row>
@@ -47,7 +51,7 @@
           <TarefaView
             :tarefa="tarefa"
             @salvarClick="recebiSalvar(index)"
-            @mandarDel="deletarTarefa(index)"
+            @mandarDel="deletarTarefa(tarefa)"
           />
         </div>
       </v-list-item-group>
@@ -76,6 +80,7 @@ export default {
         name: [(val) => (val || "").length > 0 || "This field is required"],
       },
       snackbar: false,
+      deletado: false,
       tarefas: [],
     };
   },
@@ -94,9 +99,10 @@ export default {
         this.tarefas[index].status == "pending";
       }
     },
-    deletarTarefa(index) {
-      tasksApi.removeTask(index).then(() => {
+    deletarTarefa(tarefa) {
+      tasksApi.removeTask(tarefa.id).then(() => {
         this.getTasks();
+        this.deletado = true;
       });
     },
     getTasks() {
