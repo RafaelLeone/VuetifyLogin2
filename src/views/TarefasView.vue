@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import TasksApi from "../TasksApi.js";
 import TarefaView from "../components/tarefas/TarefaView.vue";
 
 export default {
@@ -70,16 +71,16 @@ export default {
       snackbar: false,
       defaultForm,
       tarefas: [
-        {
-          titulo: "Ir ao mercado",
-          descricao: "Comprar pão, café e iogurte",
-          concluido: false,
-        },
-        {
-          titulo: "Comprar ração",
-          descricao: "A última foi a verde dos dois",
-          concluido: false,
-        },
+        // {
+        //   titulo: "Ir ao mercado",
+        //   descricao: "Comprar pão, café e iogurte",
+        //   concluido: false,
+        // },
+        // {
+        //   titulo: "Comprar ração",
+        //   descricao: "A última foi a verde dos dois",
+        //   concluido: false,
+        // },
       ],
     };
   },
@@ -97,11 +98,25 @@ export default {
     submit() {
       this.snackbar = true;
       this.resetForm();
+      const novaTarefa = {
+        titulo: this.form.first,
+        descricao: this.form.last,
+        concluido: false,
+      };
+      this.tarefas.push(novaTarefa);
     },
     recebiSalvar(index) {
       console.log("entrei");
       this.tarefas[index].concluido = !this.tarefas[index].concluido;
     },
+    listarTarefas() {
+      TasksApi.getTasks((data) => {
+        this.tarefas = data;
+      });
+    },
+  },
+  created() {
+    this.listarTarefas();
   },
 };
 </script>
