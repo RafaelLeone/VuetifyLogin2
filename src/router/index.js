@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import AboutView from "@/views/AboutView.vue";
 import PublicLayout from "@/layouts/PublicLayout.vue";
 import PrivateLayout from "@/layouts/PrivateLayout.vue";
 import HomeView from "@/views/HomeView.vue";
@@ -47,6 +48,10 @@ const routes = [
         component: TasksListView,
       },
     ],
+  },
+  {
+    path: "/sobre",
+    component: AboutView,
   },
 ];
 
