@@ -1,18 +1,20 @@
 <template>
   <v-container class="overflow-hidden mt-4">
     <h2>Resumo das tarefas</h2>
-    <div v-for="item in data" :key="item.group">
-      <h3>
-        {{ item.group }} <v-chip class="ma-2"> {{ item.tasks }} </v-chip>
-      </h3>
-      <v-progress-circular
-        :rotate="360"
-        :size="100"
-        :width="15"
-        :value="item.percent"
-        color="pink"
-      >
-      </v-progress-circular>
+    <div style="display: flex">
+      <div style="padding: 22px" v-for="item in data" :key="item.group">
+        <h3>
+          {{ item.group }} <v-chip class="ma-2"> {{ item.tasks }} </v-chip>
+        </h3>
+        <v-progress-circular
+          :rotate="360"
+          :size="100"
+          :width="15"
+          :value="item.percent"
+          color="pink"
+        >
+        </v-progress-circular>
+      </div>
     </div>
     <div class="my-4">
       <v-btn rounded color="primary" dark :to="{ name: 'taskList' }">
