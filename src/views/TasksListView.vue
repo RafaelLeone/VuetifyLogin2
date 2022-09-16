@@ -105,6 +105,12 @@ export default {
         this.deletado = true;
       });
     },
+    mudarTarefa(tarefa) {
+      tasksApi.updateTask(tarefa).then(() => {
+        this.getTasks();
+        this.deletado = true;
+      });
+    },
     getTasks() {
       TasksApi.getTasks().then((data) => {
         this.tarefas = data;

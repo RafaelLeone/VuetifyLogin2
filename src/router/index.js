@@ -1,19 +1,52 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import TarefasView from "../views/TarefasView.vue";
+import PublicLayout from "@/layouts/PublicLayout.vue";
+import PrivateLayout from "@/layouts/PrivateLayout.vue";
+import HomeView from "@/views/HomeView.vue";
+import TasksListView from "@/views/TasksListView.vue";
+import TasksUpdateView from "@/views/TasksUpdateView.vue";
+import TasksSummaryView from "@/views/TasksSummaryView.vue";
+import LoginView from "@/views/LoginView.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "tarefas",
-    component: TarefasView,
+    component: PublicLayout,
+    children: [
+      {
+        path: "",
+        name: "home",
+        component: HomeView,
+      },
+      {
+        path: "login",
+        name: "login",
+        component: LoginView,
+      },
+    ],
   },
   {
-    path: "/sobre",
-    name: "sobre",
-    component: () => import("../views/AboutView.vue"),
+    path: "/tasks",
+    component: PrivateLayout,
+    children: [
+      {
+        path: "summary",
+        name: "taskSummary",
+        component: TasksSummaryView,
+      },
+      {
+        path: ":id",
+        name: "taskUpdate",
+        component: TasksUpdateView,
+      },
+      {
+        path: "",
+        name: "taskList",
+        component: TasksListView,
+      },
+    ],
   },
 ];
 

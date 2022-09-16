@@ -37,4 +37,16 @@ export default {
         });
     });
   },
+  updateTask: (task) => {
+    return new Promise((resolve, reject) => {
+      api
+        .post(`/api/tasks/${task.id}`, task)
+        .then((response) => {
+          return resolve(response.data);
+        })
+        .catch((error) => {
+          return reject(error);
+        });
+    });
+  },
 };
