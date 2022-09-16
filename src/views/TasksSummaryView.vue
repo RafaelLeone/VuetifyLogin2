@@ -11,7 +11,7 @@
           :size="100"
           :width="15"
           :value="item.percent"
-          color="pink"
+          color="teal"
         >
         </v-progress-circular>
       </div>
