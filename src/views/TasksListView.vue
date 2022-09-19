@@ -108,7 +108,7 @@ export default {
     mudarTarefa(tarefa) {
       tasksApi.updateTask(tarefa).then(() => {
         this.getTasks();
-        this.deletado = true;
+        // this.deletado = true;
       });
     },
     getTasks() {

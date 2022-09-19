@@ -16,7 +16,13 @@
           <v-list-item-title>{{ tarefa.title }}</v-list-item-title>
           <v-list-item-subtitle>{{ tarefa.project }}</v-list-item-subtitle>
         </v-list-item-content>
-
+        <v-btn
+          :to="{ name: 'taskUpdate', params: { id: tarefa.id, task: tarefa } }"
+          depressed
+          color="warning"
+        >
+          Editar
+        </v-btn>
         <v-btn @click="mandarDeletar" depressed color="error"> Deletar </v-btn>
       </template>
     </v-list-item>
